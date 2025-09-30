@@ -1,4 +1,5 @@
 import "./App.css";
+import About from "./components/page";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           Created by <span className="font-semibold">Vishan Chathuranga</span>
         </footer>
       </div>
+      <About/>
     </section>
   );
 }
