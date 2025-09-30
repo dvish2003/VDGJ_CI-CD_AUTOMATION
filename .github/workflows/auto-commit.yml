@@ -1,0 +1,33 @@
+name: Auto Commit Bot
+
+on:
+  push:
+    branches:
+      - main   # change if your branch is different
+
+permissions:
+  contents: write
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git with your repo URL
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "vishan"
+          git config user.email "vishanchathuranga63@gmail.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/dvish2003/VDGJ_CI-CD_AUTOMATION.git
+
+      - name: Commit all changes
+        run: |
+          git add .
+          git commit -m "auto-commit: update" || echo "No changes to commit"
+          git push origin main
